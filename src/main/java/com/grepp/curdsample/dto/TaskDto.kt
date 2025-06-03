@@ -1,63 +1,57 @@
-package com.grepp.curdsample.dto;
+package com.grepp.curdsample.dto
 
-import com.grepp.curdsample.domain.Task;
-import com.grepp.curdsample.util.PriorityResolver;
-import com.grepp.curdsample.util.TimeFormatter;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-
-import java.time.LocalDate;
-
+import com.grepp.curdsample.domain.Task
+import com.grepp.curdsample.util.PriorityResolver
+import com.grepp.curdsample.util.TimeFormatter
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
+import lombok.AllArgsConstructor
+import lombok.Data
+import lombok.NoArgsConstructor
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskDto {
+class TaskDto {
+    private var code: String? = null
 
-    private String code;
+    private var title: @NotBlank(message = "작업 이름은 반드시 입력되어야 합니다") String? = null
 
-    @NotBlank(message = "작업 이름은 반드시 입력되어야 합니다")
-    private String title;
+    private var description: String? = null
 
-    private String description;
+    private var priority: @Min(value = 0) Int? = null
 
-    @Min(value = 0)
-    private Integer priority;
+    private var completeStatus = false
 
-    private boolean completeStatus;
+    private var startTime: @NotBlank(message = "날짜는 반드시 들어있어야 합니다") @Pattern(
+        regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$",
+        message = "올바른 날짜를 입력하여 주시기 바랍니다."
+    ) String? = null
 
-    @NotBlank(message = "날짜는 반드시 들어있어야 합니다")
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$", message = "올바른 날짜를 입력하여 주시기 바랍니다.")
-    private String startTime;
+    private var endTime: @NotBlank(message = "날짜는 반드시 들어있어야 합니다") @Pattern(
+        regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$",
+        message = "올바른 날짜를 입력하여 주시기 바랍니다."
+    ) String? = null
 
-    @NotBlank(message = "날짜는 반드시 들어있어야 합니다")
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/([0-2][0-9]|3[01])/\\d{4}$", message = "올바른 날짜를 입력하여 주시기 바랍니다.")
-    private String endTime;
+    val priorityLevel: String
+        get() = PriorityResolver.resolve(priority)
 
-    public static TaskDto from(Task task) {
 
-        TaskDto taskDto = new TaskDto();
+    companion object {
+        @JvmStatic
+        fun from(task: Task): TaskDto {
+            val taskDto = TaskDto()
 
-        taskDto.code = task.getCode();
-        taskDto.title = task.getTitle();
-        taskDto.description = task.getDescription();
-        taskDto.priority = task.getPriority();
-        taskDto.completeStatus = task.isCompleteStatus();
-        taskDto.startTime = TimeFormatter.convertToStr(task.getStartTime());
-        taskDto.endTime = TimeFormatter.convertToStr(task.getEndTime());
+            taskDto.code = task.getCode()
+            taskDto.title = task.getTitle()
+            taskDto.description = task.getDescription()
+            taskDto.priority = task.getPriority()
+            taskDto.completeStatus = task.isCompleteStatus()
+            taskDto.startTime = TimeFormatter.convertToStr(task.getStartTime())
+            taskDto.endTime = TimeFormatter.convertToStr(task.getEndTime())
 
-        return taskDto;
-
+            return taskDto
+        }
     }
-
-    public String getPriorityLevel() {
-        return PriorityResolver.resolve(priority);
-    }
-
-
 }
