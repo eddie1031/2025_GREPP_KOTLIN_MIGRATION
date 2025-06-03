@@ -54,20 +54,6 @@ class Task(
         this.updatedAt = LocalDateTime.now()
     }
 
-    companion object {
-        @JvmStatic
-        fun of(taskDto: TaskDto): Task {
-            return Task(
-                code = taskDto.code,
-                title = taskDto.title,
-                description = taskDto.description,
-                priority = taskDto.priority,
-                completeStatus = taskDto.completeStatus,
-                startTime = TimeFormatter.convertToLocalDate(taskDto.startTime),
-                endTime = TimeFormatter.convertToLocalDate(taskDto.endTime),
-            )
-        }
-    }
 }
 
 fun Task.toDto(): TaskDto {

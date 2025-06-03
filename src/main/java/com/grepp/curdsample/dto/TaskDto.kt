@@ -39,21 +39,6 @@ data class TaskDto(
     val priorityLevel: String
         get() = PriorityResolver.resolve(priority)
 
-    companion object {
-        @JvmStatic
-        fun from(task: Task): TaskDto {
-            return TaskDto(
-                code = task.code,
-                title = task.title,
-                description = task.description,
-                priority = task.priority,
-                completeStatus = task.completeStatus,
-                startTime = TimeFormatter.convertToStr(task.startTime),
-                endTime = TimeFormatter.convertToStr(task.endTime),
-            )
-        }
-    }
-
 }
 
 fun TaskDto.toEntity(): Task {
