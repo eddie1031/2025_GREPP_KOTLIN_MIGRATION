@@ -48,13 +48,13 @@ data class TaskDto(
         fun from(task: Task): TaskDto {
             val taskDto = TaskDto()
 
-            taskDto.code = task.getCode()
-            taskDto.title = task.getTitle()
-            taskDto.description = task.getDescription()
-            taskDto.priority = task.getPriority()
-            taskDto.completeStatus = task.isCompleteStatus()
-            taskDto.startTime = TimeFormatter.convertToStr(task.getStartTime())
-            taskDto.endTime = TimeFormatter.convertToStr(task.getEndTime())
+            taskDto.code = task.code
+            taskDto.title = task.title
+            taskDto.description = task.description
+            taskDto.priority = task.priority
+            taskDto.completeStatus = task.completeStatus
+            taskDto.startTime = TimeFormatter.convertToStr(task.startTime)
+            taskDto.endTime = TimeFormatter.convertToStr(task.endTime)
 
             return taskDto
         }
