@@ -74,10 +74,6 @@ public class TaskService {
         return taskDto;
     }
 
-    private Task findById(Long id) {
-        return taskRepository.findById(id).orElse(null);
-    }
-
     private Task findByCode(String code) {
         return taskRepository.findByCode(code).orElse(null);
     }

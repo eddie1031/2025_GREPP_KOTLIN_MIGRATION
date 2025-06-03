@@ -93,7 +93,11 @@ public class TaskViewController {
     }
 
     @PostMapping("/tasks/{code}/edit")
-    public String updateTask(@PathVariable String code) {
+    public String updateTask(@PathVariable String code
+            , @Valid TaskDto updateReq) {
+
+        updateReq.setCode(code);
+        taskService.update(updateReq);
 
         return "redirect:/tasks/" + code;
     }

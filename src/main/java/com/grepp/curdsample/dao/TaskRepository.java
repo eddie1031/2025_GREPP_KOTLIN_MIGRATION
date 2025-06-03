@@ -12,5 +12,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("select t from Task t where t.endTime = CURRENT_DATE order by t.priority desc limit 10")
     List<Task> findTenTasksDueToToday();
-
 }

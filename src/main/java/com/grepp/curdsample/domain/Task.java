@@ -42,6 +42,7 @@ public class Task {
 
     public void updateCheck() {
         this.completeStatus = !this.completeStatus;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void update(TaskDto dto) {
@@ -53,6 +54,8 @@ public class Task {
 
         this.startTime = TimeFormatter.convertToLocalDate(dto.getStartTime());
         this.endTime = TimeFormatter.convertToLocalDate(dto.getEndTime());
+
+        this.updatedAt = LocalDateTime.now();
 
     }
 
