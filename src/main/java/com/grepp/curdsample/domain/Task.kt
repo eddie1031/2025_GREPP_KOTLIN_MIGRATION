@@ -69,3 +69,15 @@ class Task(
         }
     }
 }
+
+fun Task.toDto(): TaskDto {
+    return TaskDto(
+        code = this.code,
+        title = this.title,
+        description = this.description,
+        priority = this.priority,
+        completeStatus = this.completeStatus,
+        startTime = TimeFormatter.convertToStr(this.startTime),
+        endTime = TimeFormatter.convertToStr(this.endTime),
+    )
+}
