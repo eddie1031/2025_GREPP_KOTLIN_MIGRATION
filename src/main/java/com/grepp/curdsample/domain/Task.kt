@@ -3,9 +3,6 @@ package com.grepp.curdsample.domain
 import com.grepp.curdsample.dto.TaskDto
 import com.grepp.curdsample.util.TimeFormatter
 import jakarta.persistence.*
-import lombok.AccessLevel
-import lombok.Getter
-import lombok.NoArgsConstructor
 import lombok.Setter
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -20,19 +17,19 @@ class Task(
 
     @Setter
     @Column(nullable = false, unique = true)
-    var code: String? = null,
+    val code: String,
 
-    var title: String? = null,
+    var title: String,
 
-    var description: String? = null,
+    var description: String,
 
-    var priority: Int? = null,
+    var priority: Int,
 
-    var completeStatus: Boolean = false,
+    var completeStatus: Boolean,
 
-    var startTime: LocalDate? = null,
+    var startTime: LocalDate,
 
-    var endTime: LocalDate? = null,
+    var endTime: LocalDate,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
@@ -60,17 +57,15 @@ class Task(
     companion object {
         @JvmStatic
         fun of(taskDto: TaskDto): Task {
-            val task = Task()
-
-            task.code = taskDto.code
-            task.title = taskDto.title
-            task.description = taskDto.description
-            task.priority = taskDto.priority
-            task.completeStatus = taskDto.completeStatus
-            task.startTime = TimeFormatter.convertToLocalDate(taskDto.startTime)
-            task.endTime = TimeFormatter.convertToLocalDate(taskDto.endTime)
-
-            return task
+            return Task(
+                code = taskDto.code,
+                title = taskDto.title,
+                description = taskDto.description,
+                priority = taskDto.priority,
+                completeStatus = taskDto.completeStatus,
+                startTime = TimeFormatter.convertToLocalDate(taskDto.startTime),
+                endTime = TimeFormatter.convertToLocalDate(taskDto.endTime),
+            )
         }
     }
 }

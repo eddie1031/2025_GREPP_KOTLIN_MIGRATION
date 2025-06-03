@@ -51,7 +51,7 @@ public class TaskViewController {
 
     @GetMapping("/tasks/append")
     public String showAddPage(Model model) {
-        model.addAttribute("taskDto", new TaskDto());
+//        model.addAttribute("taskDto", new TaskDto());
         return "tasks/add";
     }
 
