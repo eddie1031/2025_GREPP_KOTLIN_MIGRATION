@@ -8,18 +8,20 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/tasks")
-class TaskApiController {
-    private val taskService: TaskService? = null
+class TaskApiController(
+    private val taskService: TaskService
+) {
 
     @PatchMapping("/{code}/status")
-    fun updateTaskStatus(@PathVariable code: String?): GeneralApiResponse<TaskDto?> {
-        val taskDto = taskService!!.checkTaskByCode(code)
-        return GeneralApiResponse.< TaskDto > builder < TaskDto ? > ()
-            .data(taskDto)
-            .msg("성공적으로 반영하였습니다!")
-            .build()
+    fun updateTaskStatus(
+        @PathVariable code: String
+    ): GeneralApiResponse<TaskDto> {
+        val taskDto = taskService.checkTaskByCode(code)
+        return GeneralApiResponse(
+            data = taskDto,
+            msg = "성공적으로 반영되었습니다!"
+        )
     }
 
     @DeleteMapping("/{code}")

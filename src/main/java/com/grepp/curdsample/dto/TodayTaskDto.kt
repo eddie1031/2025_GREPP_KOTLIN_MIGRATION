@@ -1,23 +1,18 @@
 package com.grepp.curdsample.dto
 
-import java.util.stream.Collectors
-
 data class TodayTaskDto(
-    val uncompletedTasks: MutableList<TaskDto?>? = ArrayList<TaskDto?>(),
-    val completedTasks: MutableList<TaskDto?>? = ArrayList<TaskDto?>()
-) {
+    val uncompletedTasks: List<TaskDto>,
+    val completedTasks: List<TaskDto>,
+)
 
-    companion object {
-        fun from(tasks: MutableList<TaskDto?>): TodayTaskDto {
-            val result = tasks.stream()
-                .collect(
-                    Collectors.partitioningBy(TaskDto::completeStatus)
-                )
-            return TodayTaskDto(
-                result[false],
-                result[true]
-            )
-        }
-    }
+fun List<TaskDto>.toTodayTasks(): TodayTaskDto {
+
+    val (completed, unCompleted) = partition { it.completeStatus }
+
+    return TodayTaskDto(
+        completedTasks = completed,
+        uncompletedTasks = unCompleted
+    )
 
 }
+
