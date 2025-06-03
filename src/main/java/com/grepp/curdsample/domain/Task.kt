@@ -1,5 +1,6 @@
 package com.grepp.curdsample.domain
 
+import com.grepp.curdsample.dto.TaskDescription
 import com.grepp.curdsample.dto.TaskDto
 import com.grepp.curdsample.util.TimeFormatter
 import jakarta.persistence.*
@@ -65,5 +66,19 @@ fun Task.toDto(): TaskDto {
         completeStatus = this.completeStatus,
         startTime = TimeFormatter.convertToStr(this.startTime),
         endTime = TimeFormatter.convertToStr(this.endTime),
+    )
+}
+
+fun Task.toDescription(): TaskDescription {
+    return TaskDescription(
+        code = this.code,
+        title = this.title,
+        description = this.description,
+        priority = this.priority,
+        completeStatus = this.completeStatus,
+        startDate = TimeFormatter.convertToStr(this.startTime),
+        dueDate = TimeFormatter.convertToStr(this.endTime),
+        creatdAt = this.createdAt,
+        updatedAt = this.updatedAt,
     )
 }

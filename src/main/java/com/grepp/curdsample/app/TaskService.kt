@@ -2,16 +2,14 @@ package com.grepp.curdsample.app
 
 import com.grepp.curdsample.dao.TaskRepository
 import com.grepp.curdsample.domain.Task
-import com.grepp.curdsample.domain.Task.Companion.of
+import com.grepp.curdsample.domain.toDescription
 import com.grepp.curdsample.domain.toDto
 import com.grepp.curdsample.dto.TaskDescription
 import com.grepp.curdsample.dto.TaskDto
 import com.grepp.curdsample.dto.TaskPageDto
 import com.grepp.curdsample.dto.toEntity
-import lombok.RequiredArgsConstructor
-import lombok.extern.slf4j.Slf4j
+import com.grepp.curdsample.exception.TaskNotFoundException
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Slice
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -65,16 +63,9 @@ class TaskService(
         return taskDto
     }
 
-    fun getDescriptionByCode(code: String?): TaskDescription {
-        return TaskDescription.from(findByCode(code))
-    }
-
-    private fun findByCode(code: String?): Task {
-        return taskRepository!!.findByCode(code)!!.orElse(null)!!
-    }
-
-    private fun genCode(): String {
-        return UUID.randomUUID().toString()
+    private fun findByCode(code: String): Task {
+        return taskRepository.findByCode(code)
+            ?: throw TaskNotFoundException("$code 에 해당하는 작업을 찾을 수 없습니다")
     }
 
     /**
@@ -83,16 +74,24 @@ class TaskService(
      * @param code 할일을 식별하기 위한 코드
      * @return [TaskDto]
      */
-    fun getByCode(code: String?): TaskDto {
-        val findTask = findByCode(code)
-        return TaskDto.from(findTask)
+    fun getByCode(code: String): TaskDto {
+        return findByCode(code).toDto()
+    }
+    //    fun getByCode(code: String?): TaskDto = findByCode(code).toDto()
+
+    fun getDescriptionByCode(code: String): TaskDescription {
+        return findByCode(code).toDescription()
     }
 
     @Transactional
-    fun removeByCode(code: String?): String? {
+    fun removeByCode(code: String): String {
         val findTask = findByCode(code)
-        taskRepository!!.delete(findTask)
+        taskRepository.delete(findTask)
 
         return code
+    }
+
+    private fun genCode(): String {
+        return UUID.randomUUID().toString()
     }
 }
