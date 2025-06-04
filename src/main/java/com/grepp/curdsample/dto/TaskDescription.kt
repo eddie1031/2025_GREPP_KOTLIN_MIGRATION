@@ -1,8 +1,8 @@
 package com.grepp.curdsample.dto
 
 import com.grepp.curdsample.domain.Task
-import com.grepp.curdsample.util.PriorityResolver
-import com.grepp.curdsample.util.TimeFormatter
+import com.grepp.curdsample.util.convertToStr
+import com.grepp.curdsample.util.priorityResolve
 
 data class TaskDescription(
     val code: String,
@@ -17,7 +17,7 @@ data class TaskDescription(
 ) {
 
     val priorityLevel: String
-        get() = PriorityResolver.resolve(priority)
+        get() = priorityResolve(priority)
 
 
     companion object {
@@ -29,10 +29,10 @@ data class TaskDescription(
                 task.description,
                 task.priority,
                 task.completeStatus,
-                TimeFormatter.convertToStr(task.startTime),
-                TimeFormatter.convertToStr(task.endTime),
-                TimeFormatter.convertToStr(task.createdAt),
-                TimeFormatter.convertToStr(task.updatedAt)
+                convertToStr(task.startTime),
+                convertToStr(task.endTime),
+                convertToStr(task.createdAt),
+                convertToStr(task.updatedAt)
             )
         }
     }

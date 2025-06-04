@@ -1,8 +1,8 @@
 package com.grepp.curdsample.dto
 
 import com.grepp.curdsample.domain.Task
-import com.grepp.curdsample.util.PriorityResolver
-import com.grepp.curdsample.util.TimeFormatter
+import com.grepp.curdsample.util.convertToLocalDate
+import com.grepp.curdsample.util.priorityResolve
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
@@ -37,7 +37,7 @@ data class TaskDto(
 ) {
 
     val priorityLevel: String
-        get() = PriorityResolver.resolve(priority)
+        get() = priorityResolve(priority)
 
 }
 
@@ -48,7 +48,7 @@ fun TaskDto.toEntity(): Task {
         description = this.description,
         priority = this.priority,
         completeStatus = this.completeStatus,
-        startTime = TimeFormatter.convertToLocalDate(this.startTime),
-        endTime = TimeFormatter.convertToLocalDate(this.endTime),
+        startTime = convertToLocalDate(this.startTime),
+        endTime = convertToLocalDate(this.endTime),
     )
 }

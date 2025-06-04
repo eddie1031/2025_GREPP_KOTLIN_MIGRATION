@@ -20,17 +20,19 @@ class TaskApiController(
         val taskDto = taskService.checkTaskByCode(code)
         return GeneralApiResponse(
             data = taskDto,
-            msg = "성공적으로 반영되었습니다!"
+            msg = "성공적으로 반영되었습니다!",
         )
     }
 
     @DeleteMapping("/{code}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) //    public ResponseEntity<Void> deleteTask(@PathVariable String code) {
-    fun deleteTask(@PathVariable code: String?): GeneralApiResponse<Void?> {
-        taskService!!.removeByCode(code)
-        //        return ResponseEntity.noContent().build(); // 204
-        return GeneralApiResponse.< Void > builder < java . lang . Void ? > ()
-            .msg("성공적으로 삭제되었습니다!")
-            .build()
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteTask(
+        @PathVariable code: String
+    ): GeneralApiResponse<Void> {
+        taskService.removeByCode(code)
+        return GeneralApiResponse(
+            msg = "성공적으로 삭제되었습니다"
+        )
     }
+
 }

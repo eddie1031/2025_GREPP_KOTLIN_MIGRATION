@@ -2,7 +2,8 @@ package com.grepp.curdsample.domain
 
 import com.grepp.curdsample.dto.TaskDescription
 import com.grepp.curdsample.dto.TaskDto
-import com.grepp.curdsample.util.TimeFormatter
+import com.grepp.curdsample.util.convertToLocalDate
+import com.grepp.curdsample.util.convertToStr
 import jakarta.persistence.*
 import lombok.Setter
 import java.time.LocalDate
@@ -49,8 +50,8 @@ class Task(
         this.priority = dto.priority
         this.completeStatus = dto.completeStatus
 
-        this.startTime = TimeFormatter.convertToLocalDate(dto.startTime)
-        this.endTime = TimeFormatter.convertToLocalDate(dto.endTime)
+        this.startTime = convertToLocalDate(dto.startTime)
+        this.endTime = convertToLocalDate(dto.endTime)
 
         this.updatedAt = LocalDateTime.now()
     }
@@ -64,8 +65,8 @@ fun Task.toDto(): TaskDto {
         description = this.description,
         priority = this.priority,
         completeStatus = this.completeStatus,
-        startTime = TimeFormatter.convertToStr(this.startTime),
-        endTime = TimeFormatter.convertToStr(this.endTime),
+        startTime = convertToStr(this.startTime),
+        endTime = convertToStr(this.endTime),
     )
 }
 
@@ -76,9 +77,9 @@ fun Task.toDescription(): TaskDescription {
         description = this.description,
         priority = this.priority,
         completeStatus = this.completeStatus,
-        startDate = TimeFormatter.convertToStr(this.startTime),
-        dueDate = TimeFormatter.convertToStr(this.endTime),
-        creatdAt = this.createdAt,
-        updatedAt = this.updatedAt,
+        startDate = convertToStr(this.startTime),
+        dueDate = convertToStr(this.endTime),
+        createdAt = convertToStr(this.createdAt),
+        updatedAt = convertToStr(this.updatedAt),
     )
 }
