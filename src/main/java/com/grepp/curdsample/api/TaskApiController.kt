@@ -3,7 +3,6 @@ package com.grepp.curdsample.api
 import com.grepp.curdsample.app.TaskService
 import com.grepp.curdsample.dto.GeneralApiResponse
 import com.grepp.curdsample.dto.TaskDto
-import lombok.RequiredArgsConstructor
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 

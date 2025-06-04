@@ -36,9 +36,9 @@
             <div class="flex gap-6 w-full">
                 <div class="flex items-center justify-center">
                     <div class="form-control">
-                        <label class="cursor-pointer label" th:onclick="askCheck([[${task.isCompleteStatus()}]], [[${task.code}]])" >
+                        <label class="cursor-pointer label" th:onclick="askCheck([[${task.getCompleteStatus()}]], [[${task.code}]])" >
                             <span class="label-text mr-4">Finished</span>
-                            <input type="checkbox" th:checked="${task.isCompleteStatus()}" th:value="${task.isCompleteStatus()}" class="checkbox checkbox-accent checkbox-xs" />
+                            <input type="checkbox" th:checked="${task.getCompleteStatus()}" th:value="${task.getCompleteStatus()}" class="checkbox checkbox-accent checkbox-xs" />
                         </label>
                     </div>
                 </div>

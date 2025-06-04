@@ -17,6 +17,7 @@ data class TaskDto(
 
     @field: Min(value = 0)
     val priority: Int = -1,
+    val priorityLevel: String = "",
 
     val completeStatus: Boolean = false,
 
@@ -33,13 +34,7 @@ data class TaskDto(
     )
     @field: NotBlank(message = "날짜는 반드시 들어있어야 합니다")
     val endTime: String = ""
-
-) {
-
-    val priorityLevel: String
-        get() = priorityResolve(priority)
-
-}
+)
 
 fun TaskDto.toEntity(): Task {
     return Task(

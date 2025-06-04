@@ -4,6 +4,7 @@ import com.grepp.curdsample.dto.TaskDescription
 import com.grepp.curdsample.dto.TaskDto
 import com.grepp.curdsample.util.convertToLocalDate
 import com.grepp.curdsample.util.convertToStr
+import com.grepp.curdsample.util.priorityResolve
 import jakarta.persistence.*
 import lombok.Setter
 import java.time.LocalDate
@@ -67,6 +68,7 @@ fun Task.toDto(): TaskDto {
         completeStatus = this.completeStatus,
         startTime = convertToStr(this.startTime),
         endTime = convertToStr(this.endTime),
+        priorityLevel = priorityResolve(this.priority),
     )
 }
 
@@ -81,5 +83,6 @@ fun Task.toDescription(): TaskDescription {
         dueDate = convertToStr(this.endTime),
         createdAt = convertToStr(this.createdAt),
         updatedAt = convertToStr(this.updatedAt),
+        priorityLevel = priorityResolve(this.priority)
     )
 }
