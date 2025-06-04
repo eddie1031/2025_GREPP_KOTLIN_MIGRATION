@@ -1,8 +1,5 @@
-package com.grepp.curdsample.view
+package com.grepp.curdsample
 
-import com.grepp.curdsample.app.TaskService
-import com.grepp.curdsample.dto.TaskDto
-import com.grepp.curdsample.dto.toTodayTasks
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Pageable

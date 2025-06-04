@@ -1,10 +1,14 @@
-package com.grepp.curdsample.api
+package com.grepp.curdsample
 
-import com.grepp.curdsample.app.TaskService
-import com.grepp.curdsample.dto.GeneralApiResponse
-import com.grepp.curdsample.dto.TaskDto
+import com.grepp.curdsample.GeneralApiResponse
+import com.grepp.curdsample.TaskDto
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/tasks")

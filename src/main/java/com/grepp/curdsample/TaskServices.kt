@@ -1,19 +1,10 @@
-package com.grepp.curdsample.app
+package com.grepp.curdsample
 
-import com.grepp.curdsample.dao.TaskRepository
-import com.grepp.curdsample.domain.Task
-import com.grepp.curdsample.domain.toDescription
-import com.grepp.curdsample.domain.toDto
-import com.grepp.curdsample.dto.TaskDescription
-import com.grepp.curdsample.dto.TaskDto
-import com.grepp.curdsample.dto.TaskPageDto
-import com.grepp.curdsample.dto.toEntity
-import com.grepp.curdsample.exception.TaskNotFoundException
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
+import java.util.UUID
 
 @Service
 @Transactional(readOnly = true)
